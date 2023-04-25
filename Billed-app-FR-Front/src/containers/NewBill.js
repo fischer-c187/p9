@@ -20,11 +20,13 @@ export default class NewBill {
     e.target.setCustomValidity('')
     const validFileExtension = ['jpg', 'jpeg', 'png']
     const file = this.document.querySelector(`input[data-testid="file"]`).files[0]
-    console.log(this.document.querySelector(`input[data-testid="file"]`).files)
+    // console.log(this.store)
     const filePath = e.target.value.split(/\\/g)
     const fileName = filePath[filePath.length-1]
+    // console.log(filePath)
     const extenstion = fileName.split('.').slice(-1).join('')
     if(validFileExtension.includes(extenstion)){
+      // console.log('entry')
       const formData = new FormData()
       const email = JSON.parse(localStorage.getItem("user")).email
       formData.append('file', file)
@@ -39,17 +41,17 @@ export default class NewBill {
           }
         })
         .then(({fileUrl, key}) => {
-          console.log(fileUrl)
+          // console.log(fileUrl)
           this.billId = key
           this.fileUrl = fileUrl
           this.fileName = fileName
         }).catch(error => console.error(error))
     } else {
+      // console.log('end')
       e.target.setCustomValidity("Uniquement des fichiers jpg, jpeg et png")
       e.target.reportValidity()
       e.target.value = null
     }
-    
   }
   handleSubmit = e => {
     e.preventDefault()
