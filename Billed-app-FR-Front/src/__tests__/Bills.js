@@ -79,7 +79,7 @@ describe('Given I am connected as an employee', () => {
     });
   });
 
-  describe("When promise don't resolve", () => {
+  describe("When the promise doesn't resolve", () => {
     let originalBills;
 
     beforeEach(() => {
@@ -104,7 +104,7 @@ describe('Given I am connected as an employee', () => {
       mockStore.bills = originalBills;
     });
 
-    test('Should diplay error 500', async () => {
+    test('Should display error 500', async () => {
       mockStore.bills = jest.fn(() => ({
         list: () => Promise.reject(new Error('Erreur 500')),
       }));
@@ -116,7 +116,7 @@ describe('Given I am connected as an employee', () => {
       expect(errorContainer).toHaveTextContent('Erreur 500');
     });
 
-    test('Should diplay error 404', async () => {
+    test('Should display error 404', async () => {
       mockStore.bills = jest.fn(() => ({
         list: () => Promise.reject(new Error('Erreur 404')),
       }));
@@ -129,7 +129,7 @@ describe('Given I am connected as an employee', () => {
     });
   });
 
-  describe('When we have corrupted data introduced', () => {
+  describe('When corrupted data is introduced', () => {
     let consoleLogSpy;
     let formatDateSpy;
     beforeEach(() => {
@@ -142,7 +142,7 @@ describe('Given I am connected as an employee', () => {
       consoleLogSpy.mockRestore();
       formatDateSpy.mockRestore();
     });
-    test('Then display error in log', async () => {
+    test('Then an error should be displayed in the log', async () => {
 
       formatDateSpy.mockImplementation(() => {
         throw new Error('formatDate error')

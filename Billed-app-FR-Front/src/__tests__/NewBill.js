@@ -2,8 +2,7 @@
  * @jest-environment jsdom
  */
 import '@testing-library/jest-dom';
-// import Store from '../app/Store.js';
-import { screen, waitFor, fireEvent, getByTestId } from '@testing-library/dom';
+import { screen, waitFor, fireEvent } from '@testing-library/dom';
 import userEvent from '@testing-library/user-event';
 import NewBillUI from '../views/NewBillUI.js';
 import NewBill from '../containers/NewBill.js';
@@ -35,7 +34,7 @@ describe('Given I am connected as an employee', () => {
   });
 
   describe('When I am on NewBill Page', () => {
-    test('Then, the form is displayed', () => {
+    test('Then the form is displayed', () => {
       router();
       window.onNavigate(ROUTES_PATH.NewBill);
 
@@ -125,7 +124,7 @@ describe('Given I am connected as an employee', () => {
   });
 
   describe('when form is submited with all input completed', () => {
-    test('Then, handlesubmit update request and bills page is display', async () => {
+    test('POST Bill to mock API and the bills page is displayed', async () => {
       const onNavigate = (pathname) => {
         document.querySelector('#root').innerHTML = ROUTES({ pathname });
       };
@@ -201,8 +200,8 @@ describe('Given I am connected as an employee', () => {
     });
   });
 
-  describe('When the form is submited with not completed input', () => {
-    test('then the submit fonction is not called', async () => {
+  describe('When the form is submitted with incomplete input', () => {
+    test('then the submit function is not called', async () => {
       const onNavigate = (pathname) => {
         document.querySelector('#root').innerHTML = ROUTES({ pathname });
       };
@@ -225,7 +224,6 @@ describe('Given I am connected as an employee', () => {
       await fireEvent.click(submitButton)
 
       expect(spyOnSubmit).not.toHaveBeenCalled()
-
     })
   })
 });
